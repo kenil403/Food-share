@@ -24,7 +24,7 @@ function HowCanUHelp() {
                             <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-purple-100 text-purple-500 mb-5 flex-shrink-0">
 
                                 
-                                <img style={{height:40}} alt="Post" src="images/post.svg" />
+                                <img style={{height:40}} alt="Post" src="/images/post.svg" />
 
                             </div>
                             <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
@@ -43,7 +43,7 @@ function HowCanUHelp() {
                         <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
                             <div className="flex-shrink-0 w-24 h-24 bg-purple-100 text-purple-500 rounded-full inline-flex items-center justify-center">
                                 
-                            <img style={{height:40}} alt="Notifications" src="images/notification.svg" />
+                            <img style={{height:40}} alt="Notifications" src="/images/notification.svg" />
 
                             </div>
                             <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
@@ -61,7 +61,7 @@ function HowCanUHelp() {
                             <div className="flex-shrink-0 w-24 h-24 bg-purple-100 text-purple-500 rounded-full inline-flex items-center justify-center">
                                 
 
-                                <img style={{height:40}} alt="complete" src="images/complete.svg" />
+                                <img style={{height:40}} alt="complete" src="/images/complete.svg" />
 
                             </div>
                             <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
@@ -79,7 +79,7 @@ function HowCanUHelp() {
                             <div className="flex-shrink-0 w-24 h-24 bg-purple-100 text-purple-500 rounded-full inline-flex items-center justify-center">
                                 
 
-                                <img style={{height:40}} alt="verify" src="images/verify.svg" />
+                                <img style={{height:40}} alt="verify" src="/images/verify.svg" />
 
                             </div>
                             <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
@@ -98,7 +98,7 @@ function HowCanUHelp() {
                             <div className="flex-shrink-0 w-24 h-24 bg-purple-100 text-purple-500 rounded-full inline-flex items-center justify-center">
                                 
 
-                                <img style={{height:40}} alt="reward" src="images/reward.svg" />
+                                <img style={{height:40}} alt="reward" src="/images/reward.svg" />
 
                             </div>
                             <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
@@ -117,7 +117,7 @@ function HowCanUHelp() {
                             <div className="flex-shrink-0 w-24 h-24 bg-purple-100 text-purple-500 rounded-full inline-flex items-center justify-center">
                                 
 
-                                <img style={{height:40}} alt="report" src="images/report.svg" />
+                                <img style={{height:40}} alt="report" src="/images/report.svg" />
 
                             </div>
                             <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
@@ -136,7 +136,7 @@ function HowCanUHelp() {
                             <div className="flex-shrink-0 w-24 h-24 bg-purple-100 text-purple-500 rounded-full inline-flex items-center justify-center">
                                 
 
-                                <img style={{height:40}} alt="insight" src="images/insight.svg" />
+                                <img style={{height:40}} alt="insight" src="/images/insight.svg" />
 
                             </div>
                             <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">

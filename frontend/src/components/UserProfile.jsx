@@ -13,7 +13,7 @@ const UserProfile = (props) => {
         setLoad(true);
         const fetchData = async () =>{
             await axios.get(
-                `${ConString}user/getuser/${sessionStorage.getItem('id')}`,
+                `${ConString}/user/getuser/${sessionStorage.getItem('id')}`,
                 {
                     withCredentials: true,
                     headers:{

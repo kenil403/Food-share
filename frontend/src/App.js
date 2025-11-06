@@ -68,23 +68,23 @@ function App() {
             />
             <ScholarshipProvider>
             <Routes>
-              <Route path='/UserProfile' element={<UserProfile />}></Route>
-              <Route path="/LeaderBoard" element={<LeaderBoard />}></Route>
-              <Route path="/ContactUs" element={<ContactUs />}></Route>
-              <Route path='/Home' element={<Home />}></Route>
-              <Route path="/GetReport" render element={<GetReport />}></Route>
-              <Route path='/adddrive' element={<AddDrive />}></Route>
-              <Route path='/PostReview' element={<PostReview />}></Route>
-              <Route path="/feed" element={<FeedPage />}></Route>
-              <Route path="/Drives" element={<Feed />}></Route>
-              <Route path='/aboutus' element={<AboutUs />}></Route>
-              <Route path="/VolunteerReport" element={<VolunteerReport />}></Route>
-              <Route path="/AddDriveAdmin" element={<AddDriveAdmin />}></Route>
-              <Route path="/" exact render element={<Home />}></Route>
-              <Route path="*" element={<PageNotFound />}></Route>
-              <Route path="/AddBlog" element={<AddBlog />}></Route>
-              <Route path="/Blog" element={<Blog />}></Route>
-              <Route path="/community" element={<Index/>}></Route>
+              <Route path="/" element={<Home />} />
+              <Route path="/Home" element={<Home />} />
+              <Route path='/UserProfile' element={<UserProfile />} />
+              <Route path="/LeaderBoard" element={<LeaderBoard />} />
+              <Route path="/ContactUs" element={<ContactUs />} />
+              <Route path="/GetReport" element={<GetReport />} />
+              <Route path='/adddrive' element={<AddDrive />} />
+              <Route path='/PostReview' element={<PostReview />} />
+              <Route path="/feed" element={<FeedPage />} />
+              <Route path="/Drives" element={<Feed />} />
+              <Route path='/aboutus' element={<AboutUs />} />
+              <Route path="/VolunteerReport" element={<VolunteerReport />} />
+              <Route path="/AddDriveAdmin" element={<AddDriveAdmin />} />
+              <Route path="/AddBlog" element={<AddBlog />} />
+              <Route path="/Blog" element={<Blog />} />
+              <Route path="/community" element={<Index/>} />
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
             </ScholarshipProvider>
           </div>

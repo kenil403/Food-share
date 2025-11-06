@@ -19,12 +19,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: [true, "Please Provide Mobile no."],
-        validate: {
-            validator: function (v) {
-                return validator.isMobilePhone(v, 'en-IN');
-            },
-            message: "Invalid Mobile number"
-        }
+        minLength: [10, "Mobile number must be 10 digits"],
+        maxLength: [10, "Mobile number must be 10 digits"]
     },
     email: {
         type: String,
@@ -43,23 +39,37 @@ const userSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        minLength: [20, "Minimum 20 character allowed"],
-        maxLength: [50, "Maximum 50 character allowed"],
-        required: [function () {
-            return this.role === 'hotel'; // Requires pincode if role is 'hotel'
-        }, "Address required"]
+        required: function() {
+            return this.role === 'hotel';
+        },
+        validate: {
+            validator: function(v) {
+                // If volunteer and no address provided, skip validation
+                if (this.role === 'volunteer' && !v) return true;
+                // If address is provided, check length (for both roles)
+                if (v) return v.length >= 20 && v.length <= 100;
+                // If hotel role, address is required (handled by 'required' field)
+                return true;
+            },
+            message: 'Address must be between 20-100 characters'
+        }
     },
     pincode: {
         type: String,
-        validate: {
-            validator: function (v) {
-                return /^[1-9]{1}\d{5}$/.test(v);
-            },
-            message: props => `${props.value} is not a valid pincode!`
+        required: function() {
+            return this.role === 'hotel';
         },
-        required: [function () {
-            return this.role === 'hotel'; // Requires pincode if role is 'hotel'
-        }, "Address required"]
+        validate: {
+            validator: function(v) {
+                // If volunteer and no pincode provided, skip validation
+                if (this.role === 'volunteer' && !v) return true;
+                // If pincode is provided, validate format (6 digits, first digit 1-9)
+                if (v) return /^[1-9]\d{5}$/.test(v);
+                // If hotel role, pincode is required (handled by 'required' field)
+                return true;
+            },
+            message: 'Pincode must be a valid 6-digit number'
+        }
     },
     city: {
         type: String,

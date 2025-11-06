@@ -10,7 +10,6 @@ import hotelsRoutes from "./routes/hotelsRoutes.js"
 import volunteerRoutes from "./routes/volunteerRoutes.js"
 import adminRoutes from "./routes/adminRoutes.js"
 import woLoginRoutes from "./routes/woLoginRoutes.js"
-import otpRouter from "./routes/otpRouter.js"
 import communityRoute from "./routes/community.route.js"
 const app = express();
 dotenv.config();
@@ -28,7 +27,6 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/',woLoginRoutes);
 app.use('/community',communityRoute);
-app.use('/otp', otpRouter);
 app.use('/user', userRoutes);
 app.use('/hotels', hotelsRoutes);
 app.use('/volunteer', volunteerRoutes);

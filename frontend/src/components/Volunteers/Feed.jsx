@@ -11,7 +11,7 @@ function Feed() {
         if(choice)
         {
             await axios.get(
-                `${ConString}volunteer/join_drive/${e}`,
+                `${ConString}/volunteer/join_drive/${e}`,
                 {
                     withCredentials: true,
                     headers:{
@@ -31,7 +31,7 @@ function Feed() {
         const fetchData = async() => {
             try {
                 const activeResponse = await axios.get(
-                  `${ConString}volunteer/my_drives_active`, 
+                  `${ConString}/volunteer/my_drives_active`, 
                   {
                         withCredentials: true,
                         headers: {
@@ -40,7 +40,7 @@ function Feed() {
                   }
                 );
                 const completedResponse = await axios.get(
-                    `${ConString}volunteer/my_drives_inactive`, 
+                    `${ConString}/volunteer/my_drives_inactive`, 
                     {
                         withCredentials: true,
                         headers: {

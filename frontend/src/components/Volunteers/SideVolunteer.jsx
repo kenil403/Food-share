@@ -10,7 +10,7 @@ const SidebarVol = () => {
     sessionStorage.clear();
     //database part
     try {
-      const response = await axios.get(`${ConString}user/logout`, 
+      const response = await axios.get(`${ConString}/user/logout`, 
       {
         withCredentials: true
       });

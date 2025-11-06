@@ -26,7 +26,7 @@ const Login = () => {
     console.log("entered");
     try {
       const { data } = await axios.post(
-        `${ConString}user/login`, 
+        `${ConString}/user/login`, 
         { email, role:myRole, password}, 
         {
           withCredentials: true,
@@ -52,7 +52,7 @@ const Login = () => {
 
         <div className='blur-xl invisible flex md:visible lg:visible flex-row-reverse items-center justify-center md:blur-0 lg:blur-none'>
           
-        <img src="images/loginImg.png" className="" alt="loginImg" />
+        <img src="/images/loginImg.png" className="" alt="loginImg" />
         </div>
         <div className="flex justify-center items-center">
           <section className='w-full'>

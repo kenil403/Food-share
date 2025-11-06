@@ -8,16 +8,16 @@ import { body } from 'express-validator';
 
 router.post('/register', [
     //Validation using express-validator
-    body('name', "Enter valid name!").isLength({ min: 3, max: 30 }),
-    body('mobile', "Enter valid mobile number!").isMobilePhone(),
-    body('email', "Enter valid email address!").isEmail(),
-    body('password', "Password should contain atleast 8 char with atleast one uppercase,lowercase,number and special character").isStrongPassword()
+    body('name', "Enter valid name (3-30 characters)").isLength({ min: 3, max: 30 }),
+    body('mobile', "Enter valid 10-digit mobile number").isLength({ min: 10, max: 10 }).isNumeric(),
+    body('email', "Enter valid email address").isEmail(),
+    body('password', "Password must be at least 8 characters").isLength({ min: 8, max: 32 })
 ], userRegister);
 
 router.post('/login', [
     //Validation using express-validator
     body('email', "Enter valid email address").isEmail(),
-    body('password', "Incorrect password!").isStrongPassword()
+    body('password', "Password is required").notEmpty().isLength({ min: 8 })
 ], userLogin)
 
 router.get('/getuser/:id', isAuthenticated , getUser);

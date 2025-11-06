@@ -10,7 +10,7 @@ const FeedPage = () => {
     const getResponse = async()=>{
     try {
        const response  = await axios.get(
-        `${ConString}get_feed`,
+        `${ConString}/get_feed`,
         {
           withCredentials: true,
           headers: {
@@ -19,9 +19,15 @@ const FeedPage = () => {
         }
       );
       console.log(response.data.review);
-      setdata(response.data.review);
+      setdata(response.data.review || []);
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error('Error fetching feed:', error);
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error('Failed to fetch feed. Please try again later.');
+      }
+      setdata([]);
     }
   }
   getResponse();

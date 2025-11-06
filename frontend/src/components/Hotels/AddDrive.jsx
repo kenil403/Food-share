@@ -31,7 +31,7 @@ const AddDrive = () => {
       //database
       try {
         const { data } = await axios.post(
-          `${ConString}hotels/drive_post`,
+          `${ConString}/hotels/drive_post`,
           formData,
           {
             withCredentials: true,

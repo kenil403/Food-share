@@ -10,11 +10,15 @@ const LeaderBoard = (props) => {
 
     useEffect(() => {
         setLoad(true);
-        axios.get(ConString+"get_users").then(res => {
-            setData(res.data.user);
+        axios.get(`${ConString}/get_users`, {
+            withCredentials: true
+        }).then(res => {
+            setData(res.data.user || []);
             console.log(res);
-            
-        }).catch(err => console.log(err)).finally(()=>setLoad(false));
+        }).catch(err => {
+            console.error('Error fetching leaderboard:', err);
+            setData([]);
+        }).finally(()=>setLoad(false));
 
     }, []);
 
@@ -47,7 +51,7 @@ const LeaderBoard = (props) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data.length && data.map((ele, key) => (
+                                {data.length > 0 ? data.map((ele, key) => (
                                     <tr key={key} className={`odd:bg-opacity-30 hover:bg-gray-200 hover:bg-opacity-50 even:bg-opacity-30 my-2`}>
                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                             {ele.name}
@@ -63,7 +67,13 @@ const LeaderBoard = (props) => {
                                             {ele.ndrive}
                                         </td>
                                     </tr>
-                                ))}
+                                )) : (
+                                    <tr>
+                                        <td colSpan="4" className="px-6 py-4 text-center text-gray-500">
+                                            No volunteers to display yet
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

@@ -43,7 +43,7 @@ const GetReport = () => {
         const getdata = async () => {
             try {
                 const { data } = await axios.get(
-                  `${ConString}hotels/my_drives_active`, 
+                  `${ConString}/hotels/my_drives_active`, 
                   {
                     withCredentials: true,
                     headers:{

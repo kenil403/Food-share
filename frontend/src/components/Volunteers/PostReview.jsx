@@ -25,7 +25,7 @@ const PostReview = () => {
       //database
       try {
         const { data } = await axios.post(
-          `${ConString}volunteer/review_post/${eleId}`,
+          `${ConString}/volunteer/review_post/${eleId}`,
           formData,
           {
             withCredentials: true,

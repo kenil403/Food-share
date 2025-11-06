@@ -15,7 +15,7 @@ const ContactUs = () => {
         // database
         try {
             const { data } = await axios.post(
-              `${ConString}contact_us`, 
+              `${ConString}/contact_us`, 
               { email, queries:query, fname, lname, mobile:phone, company}, 
               {
                 withCredentials: true,
@@ -36,7 +36,7 @@ const ContactUs = () => {
             <div className="flex justify-center items-center">
                 <div className='grid lg:grid-cols-2 grid-cols-1  w-3/4  '>
                     <div data-aos="fade-right">
-                    <img className="object-cover object-center rounded" alt="contactUs" src="images/contactUsImg.png" />
+                    <img className="object-cover object-center rounded" alt="contactUs" src="/images/contactUsImg.png" />
                     </div>
                     <div data-aos="fade-left" className='flex items-center justify-center'>
 

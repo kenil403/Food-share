@@ -29,7 +29,7 @@ const AddDriveAdmin = () => {
       //database
       try {
         const { data } = await axios.post(
-          `${ConString}admin/drive_post`,
+          `${ConString}/admin/drive_post`,
           formData,
           {
             withCredentials: true,

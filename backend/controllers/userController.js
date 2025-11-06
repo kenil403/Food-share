@@ -3,8 +3,7 @@ import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import { sendToken } from "../utils/jwtToken.js";
 import { validationResult } from 'express-validator';
-import { OTP } from "../models/otpSchema.js";
-import nodemailer from 'nodemailer';
+import { sendWelcomeEmail } from "../utils/emailService.js";
 import { Drives } from "../models/driveSchema.js";
 
 export const userRegister = catchAsyncError(async (req, res, next) => {
@@ -14,8 +13,8 @@ export const userRegister = catchAsyncError(async (req, res, next) => {
     if (!error.isEmpty()) {
         return next(new ErrorHandler(errorMsg, 400));
     }
-    const { role, name, mobile, email, age, address, pincode, city, password, otp } = req.body;
-    if (!role || !name || !mobile || !email || !password || !city || !otp) {
+    const { role, name, mobile, email, age, address, pincode, city, password } = req.body;
+    if (!role || !name || !mobile || !email || !password || !city) {
         return next(new ErrorHandler("Please fill full registration form"));
     }
     const isEmail = await User.findOne({ email });
@@ -23,106 +22,20 @@ export const userRegister = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("Email already Exists"));
     }
 
-    const otpDoc = await OTP.findOne({ email });
-    if (!otpDoc) {
-        return next(new ErrorHandler("OTP not found"));
-    }
-    // Verify OTP value
-    if (otp !== otpDoc.otpValue) {
-        return next(new ErrorHandler("Invalid OTP"));
-    }
-    // Verify OTP expiry time (optional, depending on your requirements)
-    if (otpDoc.expiryTime < Date.now()) {
-        return next(new ErrorHandler("OTP expired"));
-    }
-
     const user = await User.create({
         role, name, mobile, email, age, address, pincode, city, password
     });
+    
+    // Send welcome email (non-blocking)
+    sendWelcomeEmail(email, name).catch(err => {
+        console.error('Failed to send welcome email:', err);
+        // Don't fail registration if email fails
+    });
+
     res.status(200).json({
         success: true,
         message: "User Registered Successfully",
         user
-    });
-
-    const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'hppappu03@gmail.com',
-            pass: 'khhe pivx joni scqq'
-        }
-    });
-    const mailOptions = {
-        from: 'hppappu03@gmail.com',
-        to: email,
-        subject: 'Welcome to Our NGO Community!',
-        html: `<!DOCTYPE html>
-        <html lang="en">
-        
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <style>
-            body {
-              font-family: 'Arial', sans-serif;
-              margin: 0;
-              padding: 0;
-              background-color: #f5f5f5;
-            }
-        
-            .welcome-container {
-              max-width: 600px;
-              margin: 20px auto;
-              background-color: #ffffff;
-              padding: 20px;
-              border-radius: 10px;
-              box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            }
-        
-            h1 {
-              color: #333;
-              font-size: 1.5rem;
-              margin-bottom: 10px;
-            }
-        
-            p {
-              color: #555;
-              line-height: 1.6;
-              margin-bottom: 15px;
-            }
-        
-            .thank-you {
-              color: #333;
-              font-weight: bold;
-            }
-        
-            .signature {
-              color: #777;
-            }
-          </style>
-        </head>
-        
-        <body>
-          <div class="welcome-container">
-            <h1>Welcome to our NGO community, ${name}!</h1>
-            <p>We are delighted to have you join us in our mission to make a positive impact on the lives of those in need. Your registration marks the beginning of a journey towards creating a better world together.</p>
-            <p>As a member of our NGO, you will play a vital role in supporting our initiatives, whether it's through volunteering, donations, or spreading awareness. Together, we can make a meaningful difference in the lives of the underprivileged and marginalized communities.</p>
-            <p class="thank-you">Thank you for choosing to be a part of our noble cause. We look forward to working with you and creating lasting change.</p>
-            <p class="signature">Best regards,<br>Meal Mission</p>
-          </div>
-        </body>
-        
-        </html>
-        `
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-            return next(new ErrorHandler('Failed to send mail'));
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
     });
 });
 

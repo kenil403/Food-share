@@ -2,13 +2,13 @@ import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import {OTP} from "../models/otpSchema.js";
-import nodemailer from 'nodemailer';
+import { sendOTPEmail } from "../utils/emailService.js";
 import speakeasy from 'speakeasy';
 
 export const getOtp = catchAsyncError(async(req, res, next) => {
     const {email} = req.body;
     if(!email){
-        return new ErrorHandler("Email is required", 400);
+        return next(new ErrorHandler("Email is required", 400));
     }
     const isEmail = await User.findOne({email});
     if(isEmail) {
@@ -27,32 +27,18 @@ export const getOtp = catchAsyncError(async(req, res, next) => {
 
     // Save OTP in the database
     const otpDoc = await OTP.create({ email, otpValue: otp, expiryTime, otpSecret });
+    
     // Send OTP to user's email
-    const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'hppappu03@gmail.com',
-            pass: 'khhe pivx joni scqq'
-        }
-    });
-    const mailOptions = {
-        from: 'hppappu03@gmail.com',
-        to: email,
-        subject: 'OTP Verification',
-        text: `Your OTP is: ${otp}`
-    };
+    const emailResult = await sendOTPEmail(email, otp);
+    
+    if (!emailResult.success) {
+        console.error('Failed to send OTP email:', emailResult.error);
+        return next(new ErrorHandler('Failed to send OTP email'));
+    }
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-            return next(new ErrorHandler('Failed to send OTP'));
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
     res.status(200).json({
         success: true,
-        message: "Otp Sent Successfully",
+        message: "OTP Sent Successfully",
         otpDoc
     });
 });

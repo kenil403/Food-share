@@ -19,7 +19,7 @@ function HeroSection() {
                     </div>
 
                     <div data-aos="fade-left" className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6" >
-                        <img style={{ height: "28em" }} className="object-cover object-center rounded" alt="hero" src="images/heroImg.png" />
+                        <img style={{ height: "28em" }} className="object-cover object-center rounded" alt="hero" src="/images/heroImg.png" />
                     </div>
                 </div>
             </section>

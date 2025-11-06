@@ -16,7 +16,7 @@ const AddBlog = () => {
             //database
             try {
                 const { data } = await axios.post(
-                    `${ConString}admin/blog_post`,
+                    `${ConString}/admin/blog_post`,
                     {title,topic,url,message},
                     {
                         withCredentials: true,

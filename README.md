@@ -28,13 +28,56 @@ The inspiration for Meal Mission came from a profound realization of the immense
 - **Database:** MongoDB
 - **Security:** JWT
 
-## Installation
+## Installation & Setup
 
-1. Clone the repository.
-2. Navigate to the project directory.
-3. Install dependencies using `npm install` for frontend and backend both.
-4. Start the development server using `npm start` for frontend.
-5. Start the development server using `npm run dev` for backend.
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or MongoDB Atlas)
+- npm or yarn
+
+### Backend Setup
+1. Navigate to the backend directory: `cd backend`
+2. Install dependencies: `npm install`
+3. Create environment file: `cp .env.example .env`
+4. Configure your `.env` file with:
+   - MongoDB connection string
+   - JWT secret key
+   - Email credentials (for OTP functionality)
+   - Frontend URL
+5. Start the development server: `npm run dev` (or `npm start` for production)
+
+The backend will run on `http://localhost:5000`
+
+### Frontend Setup
+1. Navigate to the frontend directory: `cd frontend`
+2. Install dependencies: `npm install`
+3. (Optional) Create environment file: `cp .env.example .env`
+4. Start the development server: `npm start`
+
+The frontend will run on `http://localhost:3000`
+
+### Environment Variables
+
+**Backend (.env):**
+```
+PORT=5000
+MONGO_URL=mongodb://localhost:27017/foodshare
+FRONTEND_URL=http://localhost:3000
+JWT_SECRET_KEY=your_secret_key_here
+JWT_EXPIRE=7d
+COOKIE_EXPIRE=7
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
+```
+
+**Frontend (.env):**
+```
+REACT_APP_API_URL=http://localhost:5000
+```
+
+## Demo
 
 <video src="https://drive.google.com/file/d/1EA8RJhxYTc7mObII1GrimFgHrA4Oqqvc/view" controls title="Title"></video>
 alternative links : [https://streamable.com/hdwzuu](https://drive.google.com/file/d/1EA8RJhxYTc7mObII1GrimFgHrA4Oqqvc/view)
